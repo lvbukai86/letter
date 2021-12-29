@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>导航</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="globalHeader">
+        <form class="searchForm" action="https://www.baidu.com/s">
+        <input type="text" name="wd">
+        <button type="submit">搜索</button>
+    </form>
+    </header>
+    <main class="globalMain">
+        <ul class="siteList">
+            <li>
+                <a href="http://www.acfun.cn">
+                <div class="site">
+                    <div class="logo">A</div>
+                    <div class="link">acfun.cn</div>
+                </div>
+                 </a>
+            </li>
+            <li>
+                <a href="https://www.bilibili.com/">
+                <div class="site">
+                    <div class="logo">B</div>
+                    <div class="link">bilibili.com</div>
+                </div>
+                </a>
+            </li>
+            <li class="lost">
+                <div class="addButton">
+                    <div class="iconWrap">
+                        <svg class="icon" >
+                        <use xlink:href="#icon-tianjia"></use>
+                      </svg>
+                    </div>
+                    新增网站
+                </div>
+            </li>
+        </ul>
+    </main>
+    <script src="iconfont.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="main.js"></script>
+    
+</body>
+</html>
