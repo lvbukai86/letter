@@ -17,6 +17,23 @@ margin: 20px;
     display: flex;
     justify-content: space-between;
 }
+/*pc网站样式 */
+@media (min-width:500px){
+    .searchForm{
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .siteList{
+        margin-left: 0;
+        margin-right: -25px;
+        justify-content: flex-start;
+    }
+    .siteList >li{
+        margin-right: 25px;
+    }
+    
+} 
 
 .searchForm > input{
     width: 100%;
@@ -36,16 +53,19 @@ margin: 20px;
     font-size: 16px;
 }
 .globalMain{
-
+ max-width: 1000px;
+ margin-left: auto;
+ margin-right: auto;
 }
 .siteList{
     display: flex;
     flex-wrap: wrap;
     margin: 20px;
-    justify-content: space-between;
+    justify-content:space-between;
 }
 .siteList > li{
     margin-bottom: 10px;
+    
 }
 .siteList .site{
     width: 160px;
@@ -56,6 +76,8 @@ margin: 20px;
     background: white;
     border-radius: 4px;
     padding:  20px 0;
+    position: relative;
+    cursor: pointer;
  
 }
 .siteList .site > .logo{
@@ -66,9 +88,7 @@ margin: 20px;
     align-items: center;
     font-size: 64px;
 }
-.siteList .site > .link{
 
-}
 .siteList .addButton{
    
     width: 160px;
@@ -103,4 +123,16 @@ margin: 20px;
     width: 64px;
     height: 64px;
 
+}
+.close{
+    position:absolute;
+    top: 3px;
+    right:3px;
+    display: none;
+}
+.siteList .site:hover > .close{
+     display: block;
+}
+.close svg{
+    min-width: 100%;
 }

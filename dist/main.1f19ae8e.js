@@ -118,6 +118,42 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"main.js":[function(require,module,exports) {
+var $siteList = $('.siteList');
+var $lastLi = $('li.lost');
+var x = localStorage.getItem('x');
+var xObject = JSON.parse(x); //将其转换为 JavaScript 对象
+
+var hashMap = xObject || [{
+  logo: "A",
+  url: "https://www.acfun.cn"
+}, {
+  logo: "B",
+  url: "https://www.bilibili.com"
+}];
+
+var simplifyUrl = function simplifyUrl(url) {
+  return url.replace('https://', '').replace('http://', '').replace('www.', '').replace(/\/.*/, ''); // 删除 / 开头的后面的内容
+};
+
+var render = function render() {
+  $('ul li:not(:last)').remove(); //去除除了最后一个
+
+  hashMap.forEach(function (node, index) {
+    var $li = $("<li>\n    \n      <div class=\"site\">\n        <div class=\"logo\">".concat(node.logo, "</div>\n        <div class=\"link\">").concat(simplifyUrl(node.url), "</div>\n        <div class=\"close\">\n        <svg class=\"icon\" >\n                        <use xlink:href=\"#icon-guanbi\"></use>\n                      </svg>\n                      </div>\n      </div>\n    \n    </li>")).insertBefore($lastLi);
+    $li.on('click', function () {
+      window.open(node.url);
+    });
+    $li.on('click', '.close', function (e) {
+      e.stopPropagation(); //阻止点击事件
+
+      hashMap.splice(index, 1);
+      render();
+    });
+  });
+};
+
+render(); //第一次运行
+
 $('.addButton').on('click', function () {
   var url = window.prompt('请问你要添加的网站是什么?');
 
@@ -125,9 +161,27 @@ $('.addButton').on('click', function () {
     url = 'https://' + url;
   }
 
-  var $siteList = $('.siteList');
-  var $lastLi = $('.lost');
-  var $li = $("<li>\n    <a href=\"".concat(url, "\">\n                <div class=\"site\">\n                    <div class=\"logo\">").concat(url[0], "</div>\n                    <div class=\"link\">").concat(url, "</div>\n                </div>\n    </a>\n    </li>")).insertBefore($lastLi);
+  hashMap.push({
+    logo: simplifyUrl(url)[0].toUpperCase(),
+    url: url
+  });
+  render();
+});
+
+window.onbeforeunload = function () {
+  var string = JSON.stringify(hashMap);
+  localStorage.setItem('x', string);
+};
+
+$(document).on('keypress', function (e) {
+  //const key=e.key 变量名和赋值名一样可按下面简写
+  var key = e.key;
+
+  for (var i = 0; i < hashMap.length; i++) {
+    if (hashMap[i].logo.toLowerCase() === key) {
+      window.open(hashMap[i].url);
+    }
+  }
 });
 },{}],"C:/Users/Administrator/AppData/Local/Yarn/Data/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -157,7 +211,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65154" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62584" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
